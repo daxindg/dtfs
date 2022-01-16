@@ -1,0 +1,14 @@
+- defaults:
+    link:
+        glob: true
+        relink: true
+        force: true
+
+- create:
+    - ~/.config/nvim
+
+- link:
+    ~/.config/nvim/: nvim/*
+
+    ~/.zshrc: .zshrc
+
