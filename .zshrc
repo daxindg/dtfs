@@ -1,11 +1,13 @@
-host_port=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'` export all_proxy="http://$host_port:7890"
-export http_proxy=$all_proxy
-export https_proxy=$all_proxy
+if [[ `uname -r` == *WSL* ]];then
+	host_port=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'` export all_proxy="http://$host_port:7890"
+	export http_proxy=$all_proxy
+	export https_proxy=$all_proxy
+fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
-export ZSH="/home/daxindg/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -102,8 +104,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim=nvim
-alias yarn=yarnpkg
-alias chrome=google-chrome
 
-export PATH=`yarn global bin`:$PATH
+which yarnpkg > /dev/null && alias yarn=yarnpkg
+which nvim > /dev/null && alias vim=nvim
+which google-chrome > /dev/null && alias chrome=google-chrome
+
+which yarn > /dev/null && export PATH=`yarn global bin`:$PATH
+
