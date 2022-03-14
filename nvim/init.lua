@@ -46,7 +46,12 @@ vim.wo.signcolumn="yes"
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
 vim.g.onedark_terminal_italics = 2
-vim.cmd[[colorscheme onedark]]
+vim.cmd[[
+try
+  colorscheme onedark
+catch
+endtry
+]]
 
 
 --------------------------------------
@@ -113,13 +118,6 @@ ToggleMouse = function()
 end
 
 vim.api.nvim_set_keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', { noremap = true })
-
--- Treesitter
-local ts = require("nvim-treesitter.configs")
-ts.setup({
-    highlight = {enable = true},
-    indent = {enable = false}
-  })
 
 -- Highlight on yank
 vim.api.nvim_exec([[
@@ -194,7 +192,7 @@ require('packer').startup(function()
   use 'L3MON4D3/LuaSnip'
 
   use 'onsails/lspkind-nvim'
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+  -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
   -- debugger
   use 'mfussenegger/nvim-dap'
@@ -207,4 +205,9 @@ require("lsp-config")
 require("scope-config")
 require("nerd-config")
 require("dap-config")
-
+-- Treesitter
+local ts = require("nvim-treesitter.configs")
+ts.setup({
+    highlight = {enable = true},
+    indent = {enable = false}
+  })

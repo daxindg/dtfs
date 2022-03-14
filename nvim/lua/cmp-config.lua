@@ -14,17 +14,17 @@ local source_mapping = {
   nvim_lsp_signature_help = "[Sig]"
 }
 
-local tabnine = require('cmp_tabnine.config')
-tabnine:setup({
-  max_lines = 1000;
-  max_num_results = 20;
-  sort = true;
-  run_on_every_keystroke = true;
-  snippet_placeholder = '..';
-  ignored_file_types = { -- default is not to ignore
-    -- lua = true
-  };
-})
+-- local tabnine = require('cmp_tabnine.config')
+-- tabnine:setup({
+--   max_lines = 1000;
+--   max_num_results = 20;
+--   sort = true;
+--   run_on_every_keystroke = true;
+--   snippet_placeholder = '..';
+--   ignored_file_types = { -- default is not to ignore
+--     -- lua = true
+--   };
+-- })
 
 cmp.setup({
   snippet = {
@@ -55,7 +55,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'copilot'},
-    { name = 'cmp_tabnine'},
+--    { name = 'cmp_tabnine'},
     { name = 'nvim_lsp_signature_help'},
   }, {
     { name = 'buffer' },
