@@ -1,5 +1,6 @@
 if [[ `uname -r` == *WSL* ]];then
-	host_port=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'` export all_proxy="http://$host_port:7890"
+	host_ip=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+	export all_proxy="http://$host_ip:7890"
 	export http_proxy=$all_proxy
 	export https_proxy=$all_proxy
 fi
