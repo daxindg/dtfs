@@ -1,5 +1,5 @@
 -- Set completeopt to have a better completion experience
-vim.o.completeopt="menuone,noinsert,noselect"
+vim.o.completeopt = "menuone,noinsert,noselect"
 
 local cmp = require('cmp')
 local lspkind = require('lspkind')
@@ -10,7 +10,7 @@ local source_mapping = {
   nvim_lua = "[Lua]",
   cmp_tabnine = "[TN]",
   path = "[Path]",
-  copilot = "[CP]",
+  rbfart = "[rf]",
   nvim_lsp_signature_help = "[Sig]"
 }
 
@@ -52,11 +52,10 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = cmp.config.sources({
+    { name = 'rbfart', option = { on = false } },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
-    { name = 'copilot'},
---    { name = 'cmp_tabnine'},
-    { name = 'nvim_lsp_signature_help'},
+    { name = 'nvim_lsp_signature_help' },
   }, {
     { name = 'buffer' },
   }),
@@ -67,7 +66,7 @@ cmp.setup({
       if entry.source.name == 'cmp_tabnine' then
         vim_item.kind = ''
         if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-          vim_item.kind = vim_item.kind .. ' ' ..  entry.completion_item.data.detail
+          vim_item.kind = vim_item.kind .. ' ' .. entry.completion_item.data.detail
         end
       end
       vim_item.menu = source_mapping[entry.source.name]
@@ -79,4 +78,3 @@ cmp.setup({
     ghost_text = true,
   }
 })
-
