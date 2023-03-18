@@ -1,11 +1,18 @@
 -- Telescope
+
+local actions = require('telescope.actions')
+
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
         ["<C-u>"] = false,
         ["<C-d>"] = false,
+        ["<C-j>"] = {"<Esc>", type="command"}
       },
+      n = {
+        ["<C-j>"] = actions.close
+      }
     },
     generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
     file_sorter =  require'telescope.sorters'.get_fzy_sorter,
