@@ -11,12 +11,18 @@ ZSH_THEME="ys"
 
 zstyle ':omz:update' mode disabled  # disable automatic updates
 
-plugins=(git zsh-syntax-highlighting)
+plugins=(
+	git
+	zsh-syntax-highlighting
+	zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
+bindkey '^ ' autosuggest-accept
+
 which yarnpkg > /dev/null && alias yarn=yarnpkg
-which nvim > /dev/null && alias vim=nvim
+which nvim > /dev/null && alias vim="env nvim"
 which google-chrome > /dev/null && alias chrome=google-chrome
 which yarn > /dev/null && export PATH=`yarn global bin`:$PATH
 ls $HOME/.cargo/env > /dev/null && . "$HOME/.cargo/env"
