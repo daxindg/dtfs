@@ -18,6 +18,6 @@ source $ZSH/oh-my-zsh.sh
 which yarnpkg > /dev/null && alias yarn=yarnpkg
 which nvim > /dev/null && alias vim=nvim
 which google-chrome > /dev/null && alias chrome=google-chrome
-
 which yarn > /dev/null && export PATH=`yarn global bin`:$PATH
+ls $HOME/.cargo/env > /dev/null && . "$HOME/.cargo/env"
 
