@@ -1,6 +1,6 @@
 -- Map :Format to vim.lsp.buf.formatting()
-vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-vim.cmd([[ autocmd BufWritePre *.go :lua vim.lsp.buf.formatting() ]])
+vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
+vim.cmd([[ autocmd BufWritePre *.go,*.rs :lua vim.lsp.buf.format() ]])
 
 -- Setup lspconfig.
 local nvim_lsp = require('lspconfig')
