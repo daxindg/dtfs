@@ -42,17 +42,6 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = "yes"
 
---Set colorscheme (order is important here)
-vim.o.termguicolors = true
-vim.g.onedark_terminal_italics = 2
-vim.cmd [[
-try
-  colorscheme onedark
-catch
-endtry
-]]
-
-
 --------------------------------------
 --------- General KeyMappings --------
 --------------------------------------
@@ -166,7 +155,8 @@ require('packer').startup(function()
   -- use 'ludovicchabant/vim-gutentags'
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
   use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" }
-  use 'joshdick/onedark.vim'
+  use 'navarasu/onedark.nvim'
+
 
   -- use 'itchyny/lightline.vim'
   use { 'lukas-reineke/indent-blankline.nvim' }
@@ -210,3 +200,5 @@ ts.setup({
   highlight = { enable = true },
   indent = { enable = false }
 })
+
+require('onedark').load()
