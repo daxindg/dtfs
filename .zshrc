@@ -27,7 +27,7 @@ which google-chrome > /dev/null && alias chrome=google-chrome
 which yarn > /dev/null && export PATH=`yarn global bin`:$PATH
 which /opt/homebrew/bin/brew > /dev/null && eval `/opt/homebrew/bin/brew shellenv`
 
-ls $HOME/.cargo/env > /dev/null && . "$HOME/.cargo/env"
+ls $HOME/.cargo/env &> /dev/null && . "$HOME/.cargo/env"
 
 # pci passthrough
 rebind() {
