@@ -57,6 +57,13 @@ lsp_installer.on_server_ready(function(server)
           }
         }
       }
+    end,
+    ["volar"] = function()
+      default_opts.init_options = {
+        typescript = {
+          tsdk = vim.fn.stdpath('data')..'/lsp_servers/volar/node_modules/typescript/lib',
+        },
+      }
     end
   }
 

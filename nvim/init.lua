@@ -42,6 +42,17 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = "yes"
 
+--Set colorscheme (order is important here)
+vim.o.termguicolors = true
+vim.g.onedark_terminal_italics = 2
+vim.cmd [[
+try
+  colorscheme onedark
+  hi Normal ctermbg=none guibg=none
+catch
+endtry
+]]
+
 --------------------------------------
 --------- General KeyMappings --------
 --------------------------------------
@@ -154,6 +165,8 @@ require('packer').startup(function()
 
   -- use 'ludovicchabant/vim-gutentags'
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
+  use { 'nvim-telescope/telescope-media-files.nvim' }
+
   use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" }
   use 'navarasu/onedark.nvim'
 
@@ -178,10 +191,20 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
   use 'L3MON4D3/LuaSnip'
-  use { 'daxindg/cmp-rainbow-fart' }
+  use 'daxindg/cmp-rainbow-fart'
+  use 'uga-rosa/cmp-dictionary'
 
   use 'onsails/lspkind-nvim'
   -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
+  use {
+    'martineausimon/nvim-lilypond-suite',
+    requires = { 'MunifTanjim/nui.nvim' }
+  }
 
   -- debugger
   use 'mfussenegger/nvim-dap'
@@ -194,6 +217,7 @@ require("lsp-config")
 require("scope-config")
 require("nerd-config")
 require("dap-config")
+require("lily-config")
 -- Treesitter
 local ts = require("nvim-treesitter.configs")
 ts.setup({

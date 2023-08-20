@@ -4,15 +4,6 @@ vim.o.completeopt = "menuone,noinsert,noselect"
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
-local source_mapping = {
-  buffer = "[Buffer]",
-  nvim_lsp = "[LSP]",
-  nvim_lua = "[Lua]",
-  cmp_tabnine = "[TN]",
-  path = "[Path]",
-  rbfart = "[rf]",
-  nvim_lsp_signature_help = "[Sig]"
-}
 
 -- local tabnine = require('cmp_tabnine.config')
 -- tabnine:setup({
@@ -56,20 +47,36 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'nvim_lsp_signature_help' },
+    { name = 'dictionary' },
+    { name = 'path' },
   }, {
     { name = 'buffer' },
   }),
   preselect = cmp.PreselectMode.None,
   formatting = {
     format = function(entry, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind] .. ' ' .. vim_item.kind
-      if entry.source.name == 'cmp_tabnine' then
-        vim_item.kind = ''
-        if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-          vim_item.kind = vim_item.kind .. ' ' .. entry.completion_item.data.detail
-        end
+      kind = ({
+        cmp_tabnine = ' ',
+        path        = '󰉋 ',
+        dictionary  = ' ', 
+        buffer      = '󰈙 ', 
+      })[entry.source.name]
+      if (kind == nil) then
+        kind = lspkind.presets.default[vim_item.kind]
       end
-      vim_item.menu = source_mapping[entry.source.name]
+      
+      vim_item.kind = kind .. ' ' .. vim_item.kind
+      
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        dictionary = "[DIR]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        cmp_tabnine = "[TN]",
+        path = "[Path]",
+        nvim_lsp_signature_help = "[Sig]",
+        rbfart = "[rf]",
+      })[entry.source.name]
       return vim_item
     end
   },

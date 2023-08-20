@@ -24,10 +24,14 @@ bindkey '^ ' autosuggest-accept
 which yarnpkg > /dev/null && alias yarn=yarnpkg
 which nvim > /dev/null && alias vim="env nvim"
 which google-chrome > /dev/null && alias chrome=google-chrome
-which yarn > /dev/null && export PATH=`yarn global bin`:$PATH
 which /opt/homebrew/bin/brew > /dev/null && eval `/opt/homebrew/bin/brew shellenv`
+which exa > /dev/null && alias ls=exa
+which google-chrome-stable > /dev/null && alias chrome=google-chrome-stable
+which yarn > /dev/null && export PATH=`yarn global bin 2> /dev/null`:$PATH
 
 ls $HOME/.cargo/env &> /dev/null && . "$HOME/.cargo/env"
+ls $HOME/go/bin > /dev/null && export PATH=$HOME/go/bin:$PATH
+ls $HOME/.local/bin > /dev/null && export PATH=$HOME/.local/bin:$PATH
 
 # pci passthrough
 rebind() {
@@ -63,3 +67,11 @@ dpassnv() {
     rebind $nvvga nvidia
     rebind $nvaudio snd_hda_intel
 }
+
+# pnpm
+export PNPM_HOME="/home/daxindg/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
