@@ -1,6 +1,8 @@
 local dap = require("dap")
 require("dapui").setup()
 
+dap.set_log_level("TRACE")
+
 dap.adapters.go = function(callback, _)
    local stdout = vim.loop.new_pipe(false)
    local handle
@@ -34,6 +36,34 @@ dap.adapters.go = function(callback, _)
      end,
      100)
  end
+
+dap.adapters.codelldb = {
+  type = "server",
+  port = "${port}",
+  executable = {
+    command = "/usr/bin/codelldb",
+    args = {"--port", "${port}"},
+  },
+  terminal = 'integrated',
+  sourceLanguages = { 'rust' },
+  stopOnEntry = true
+}
+
+dap.configurations.rust = {
+  {
+    name = "Rust: Launch",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      vim.fn.jobstart('cargo build') 
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = true,
+    showDisassembly = false,
+  }
+}
+
  -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
  dap.configurations.go = {
   {

@@ -45,13 +45,6 @@ vim.wo.signcolumn = "yes"
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
 vim.g.onedark_terminal_italics = 2
-vim.cmd [[
-try
-  colorscheme onedark
-  hi Normal ctermbg=none guibg=none
-catch
-endtry
-]]
 
 --------------------------------------
 --------- General KeyMappings --------
@@ -161,41 +154,36 @@ require('packer').startup(function()
   use 'tpope/vim-repeat'
   use 'tpope/vim-sleuth'
   use 'tpope/vim-commentary'
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
-  -- use 'ludovicchabant/vim-gutentags'
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
   use { 'nvim-telescope/telescope-media-files.nvim' }
-
   use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" }
   use 'navarasu/onedark.nvim'
-
-
-  -- use 'itchyny/lightline.vim'
   use { 'lukas-reineke/indent-blankline.nvim' }
   use 'sheerun/vim-polyglot'
-
-  --use 'kabouzeid/nvim-lspinstall' --archived
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
-  use 'hrsh7th/cmp-nvim-lsp-signature-help'
-
   use 'mikewest/vimroom'
   use 'preservim/nerdtree'
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+
+  use {
+    'neovim/nvim-lspconfig',
+    'onsails/lspkind-nvim',
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+  }
 
   -- use 'hrsh7th/nvim-compe'
+  use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp-signature-help'
   use 'L3MON4D3/LuaSnip'
   use 'daxindg/cmp-rainbow-fart'
   use 'uga-rosa/cmp-dictionary'
 
-  use 'onsails/lspkind-nvim'
-  -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
   use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,

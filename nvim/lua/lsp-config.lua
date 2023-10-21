@@ -6,8 +6,6 @@ vim.cmd([[ autocmd BufWritePre *.go,*.rs :lua vim.lsp.buf.format() ]])
 local nvim_lsp = require('lspconfig')
 
 -- LSP settings
--- local lsp_configs = require('lspconfig.configs')
-
 local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -37,38 +35,39 @@ nvim_lsp.gopls.setup {
   root_dir = nvim_lsp.util.root_pattern('.git', 'go.mod', '.gitignore', 'Makefile'),
 }
 
--- LspInstaller
-local lsp_installer = require("nvim-lsp-installer")
-
-lsp_installer.on_server_ready(function(server)
-  -- Specify the default options which we'll use to setup all servers
-  local default_opts = {
-    on_attach = on_attach,
-  }
-
-  -- Now we'll create a server_opts table where we'll specify our custom LSP server configuration
-  local server_opts = {
-    -- Provide settings that should only apply to the "eslintls" server
-    ["sumneko_lua"] = function ()
-      default_opts.settings = {
+require("mason").setup()
+require("mason-lspconfig").setup()
+require("mason-lspconfig").setup_handlers {
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function (server_name) -- default handler (optional)
+      nvim_lsp[server_name].setup {
+        on_attach = on_attach,
+      }
+  end,
+  -- Next, you can provide a dedicated handler for specific servers.
+  -- For example, a handler override for the `rust_analyzer`:
+  ["lua_ls"] = function ()
+    print('here please')
+    nvim_lsp.lua_ls.setup {
+      on_attach = on_attach,
+      settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT',
+          },
           diagnostics = {
-            globals = {'vim'}
+            globals = {
+              'vim',
+            },
+          },
+          workspace = {
+            checkThirdParty = false,
+            library = vim.api.nvim_get_runtime_file("", true),
           }
         }
       }
-    end,
-    ["volar"] = function()
-      default_opts.init_options = {
-        typescript = {
-          tsdk = vim.fn.stdpath('data')..'/lsp_servers/volar/node_modules/typescript/lib',
-        },
-      }
-    end
-  }
-
-  -- Use the server's custom settings, if they exist, otherwise default to the default options
-  local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
-  server:setup(server_options)
-end)
-
+    }
+  end
+}

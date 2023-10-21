@@ -4,19 +4,6 @@ vim.o.completeopt = "menuone,noinsert,noselect"
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
-
--- local tabnine = require('cmp_tabnine.config')
--- tabnine:setup({
---   max_lines = 1000;
---   max_num_results = 20;
---   sort = true;
---   run_on_every_keystroke = true;
---   snippet_placeholder = '..';
---   ignored_file_types = { -- default is not to ignore
---     -- lua = true
---   };
--- })
-
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -49,24 +36,26 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
     { name = 'dictionary' },
     { name = 'path' },
+    -- { name = 'copilot' },
   }, {
     { name = 'buffer' },
   }),
   preselect = cmp.PreselectMode.None,
   formatting = {
     format = function(entry, vim_item)
-      kind = ({
+      local kind = ({
         cmp_tabnine = ' ',
+        copilot     = ' ',
         path        = '󰉋 ',
-        dictionary  = ' ', 
-        buffer      = '󰈙 ', 
+        dictionary  = ' ',
+        buffer      = '󰈙 ',
       })[entry.source.name]
       if (kind == nil) then
         kind = lspkind.presets.default[vim_item.kind]
       end
-      
+
       vim_item.kind = kind .. ' ' .. vim_item.kind
-      
+
       vim_item.menu = ({
         buffer = "[Buffer]",
         dictionary = "[DIR]",
@@ -76,6 +65,7 @@ cmp.setup({
         path = "[Path]",
         nvim_lsp_signature_help = "[Sig]",
         rbfart = "[rf]",
+        copilot = "[CP]",
       })[entry.source.name]
       return vim_item
     end
