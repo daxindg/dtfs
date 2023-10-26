@@ -29,6 +29,7 @@ which exa > /dev/null && alias ls=exa
 which google-chrome-stable > /dev/null && alias chrome=google-chrome-stable
 which yarn > /dev/null && export PATH=`yarn global bin 2> /dev/null`:$PATH
 
+ls /usr/local/go/bin > /dev/null && export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 ls $HOME/.cargo/env &> /dev/null && . "$HOME/.cargo/env"
 ls $HOME/go/bin > /dev/null && export PATH=$HOME/go/bin:$PATH
 ls $HOME/.local/bin > /dev/null && export PATH=$HOME/.local/bin:$PATH
