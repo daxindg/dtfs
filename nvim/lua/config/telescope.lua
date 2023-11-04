@@ -15,7 +15,7 @@ require('telescope').setup {
       '--smart-case',
       '-u' -- thats the new thing
     },
-    file_ignore_patterns = { 'node_modules', '.git' },
+    file_ignore_patterns = { 'node_modules', '%.git' },
     mappings = {
       i = {
         ["<C-u>"] = false,

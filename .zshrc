@@ -1,8 +1,8 @@
 if [[ `uname -r` == *WSL* ]];then
-	host_ip=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
-	export all_proxy="http://$host_ip:7890"
-	export http_proxy=$all_proxy
-	export https_proxy=$all_proxy
+    host_ip=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+    export all_proxy="http://$host_ip:7890"
+    export http_proxy=$all_proxy
+    export https_proxy=$all_proxy
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -12,9 +12,9 @@ ZSH_THEME="ys"
 zstyle ':omz:update' mode disabled  # disable automatic updates
 
 plugins=(
-	git
-	zsh-syntax-highlighting
-	zsh-autosuggestions
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -29,10 +29,10 @@ which exa > /dev/null && alias ls=exa
 which google-chrome-stable > /dev/null && alias chrome=google-chrome-stable
 which yarn > /dev/null && export PATH=`yarn global bin 2> /dev/null`:$PATH
 
-ls /usr/local/go/bin > /dev/null && export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
+ls /usr/local/go/bin &> /dev/null && export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 ls $HOME/.cargo/env &> /dev/null && . "$HOME/.cargo/env"
-ls $HOME/go/bin > /dev/null && export PATH=$HOME/go/bin:$PATH
-ls $HOME/.local/bin > /dev/null && export PATH=$HOME/.local/bin:$PATH
+ls $HOME/go/bin &> /dev/null && export PATH=$HOME/go/bin:$PATH
+ls $HOME/.local/bin &> /dev/null && export PATH=$HOME/.local/bin:$PATH
 
 # pci passthrough
 rebind() {
