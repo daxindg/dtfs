@@ -65,14 +65,17 @@ return {
 
   -- LSP
   {
-    'neovim/nvim-lspconfig',
+    'mason-org/mason-lspconfig.nvim',
+    opts={},
     dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim'
-    },
-    config = function()
-      require('config.lsp')
-    end
+      {'mason-org/mason.nvim', opts={}},
+      { 
+        'neovim/nvim-lspconfig', 
+        config = function()
+          require('config.lsp')
+        end
+      }
+    }
   },
 
   -- cmp
@@ -86,7 +89,7 @@ return {
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp-signature-help',
 
-      'daxindg/cmp-rainbow-fart',
+      -- 'daxindg/cmp-rainbow-fart',
       'uga-rosa/cmp-dictionary',
 
       'onsails/lspkind-nvim',
@@ -117,6 +120,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
       "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
     },
     config = function()
       require('config.dap')

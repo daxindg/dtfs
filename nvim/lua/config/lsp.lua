@@ -29,44 +29,13 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 end
 
--- manually managed lsp
-nvim_lsp.gopls.setup {
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern('.git', 'go.mod', '.gitignore', 'Makefile'),
-}
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then return end
+    local bufnr = ev.buf
+    local server_name = client.name
 
-require("mason").setup()
-require("mason-lspconfig").setup()
-require("mason-lspconfig").setup_handlers {
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function (server_name) -- default handler (optional)
-      nvim_lsp[server_name].setup {
-        on_attach = on_attach,
-      }
-  end,
-  -- Next, you can provide a dedicated handler for specific servers.
-  -- For example, a handler override for the `rust_analyzer`:
-  ["lua_ls"] = function ()
-    nvim_lsp.lua_ls.setup {
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          runtime = {
-            version = 'LuaJIT',
-          },
-          diagnostics = {
-            globals = {
-              'vim',
-            },
-          },
-          workspace = {
-            checkThirdParty = false,
-            library = vim.api.nvim_get_runtime_file("", true),
-          }
-        }
-      }
-    }
+    on_attach(server_name, bufnr)
   end
-}
+})
