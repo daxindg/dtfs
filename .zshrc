@@ -5,6 +5,13 @@
 #    export https_proxy=$all_proxy
 #fi
 
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/Users/bytedance/.oh-my-zsh/custom/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="ys"
@@ -29,10 +36,12 @@ which exa > /dev/null && alias ls=exa
 which google-chrome-stable > /dev/null && alias chrome=google-chrome-stable
 which yarn > /dev/null && export PATH=`yarn global bin 2> /dev/null`:$PATH
 
-ls /usr/local/go/bin &> /dev/null && export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
+#ls /usr/local/go/bin &> /dev/null && export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 ls $HOME/.cargo/env &> /dev/null && . "$HOME/.cargo/env"
 ls $HOME/go/bin &> /dev/null && export PATH=$HOME/go/bin:$PATH
 ls $HOME/.local/bin &> /dev/null && export PATH=$HOME/.local/bin:$PATH
+
+alias claude=/usr/local/bin/claude
 
 # pci passthrough
 rebind() {
@@ -70,7 +79,7 @@ dpassnv() {
 }
 
 # pnpm
-export PNPM_HOME="/home/daxindg/.local/share/pnpm"
+export PNPM_HOME="${HOME}/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -81,5 +90,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-. "$HOME/.local/bin/env"
+#. "$HOME/.local/bin/env"
+export PATH="$HOME/.fzf/bin:$PATH"
 export PATH="$HOME/.fzf/bin:$PATH"

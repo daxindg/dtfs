@@ -24,14 +24,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    config = function()
-      local ts = require("nvim-treesitter.config");
-      ts.setup({
-        highlight = { enable = true },
-        indent = { enable = false }
-      });
-    end
+    build = ':TSUpdate'
   },
 
   {
@@ -57,16 +50,20 @@ return {
   {
     'navarasu/onedark.nvim',
     config = function()
-      require('onedark').load();
+      local onedark = require('onedark')
+      onedark.setup {
+        transparent = true,
+      };
+      onedark.load()
     end
   },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = "ibl",
     opts = {},
-    config = function ()
+    config = function()
       require('ibl').setup({
-        indent = {char = "┊"},
+        indent = { char = "┊" },
         scope = { enabled = false },
       })
     end
@@ -87,6 +84,8 @@ return {
     }
   },
 
+  { 'terrastruct/d2-vim', ft = { "d2" } },
+
   -- cmp
   {
     'hrsh7th/nvim-cmp',
@@ -94,7 +93,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lua',
+      'hrsh8th/cmp-nvim-lua',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp-signature-help',
 
@@ -109,6 +108,14 @@ return {
   },
 
   'L3MON4D3/LuaSnip',
+
+  -- {
+  --   'daxindg/cmp-codeverse',
+  --   dir = '/Users/bytedance/repos/cmp-codeverse/',
+  --   config = function ()
+  --     require('cmp_codeverse')
+  --   end
+  -- },
 
   {
     "iamcco/markdown-preview.nvim",
