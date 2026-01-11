@@ -1,9 +1,9 @@
-if [[ `uname -r` == *WSL* ]];then
-    host_ip=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
-    export all_proxy="http://$host_ip:7890"
-    export http_proxy=$all_proxy
-    export https_proxy=$all_proxy
-fi
+#if [[ `uname -r` == *WSL* ]];then
+#    host_ip=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+#    export all_proxy="http://$host_ip:7890"
+#    export http_proxy=$all_proxy
+#    export https_proxy=$all_proxy
+#fi
 
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -76,3 +76,10 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+. "$HOME/.local/bin/env"
+export PATH="$HOME/.fzf/bin:$PATH"

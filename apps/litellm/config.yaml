@@ -1,0 +1,21 @@
+model_list:
+  - model_name: kimi-k2
+    litellm_params:
+      model: os.environ/KIMI_MODEL
+      api_base: os.environ/KIMI_BASE_URL
+      api_key: "os.environ/KIMI_API_KEY"
+  - model_name: deepseek-reasoner
+    litellm_params:
+      model: deepseek/deepseek-reasoner
+      api_key: os.environ/DS_API_KEY
+
+litellm_settings:
+  cache: True
+  cache_params:
+    type: disk
+    disk_cache_dir: /app/.litellm-cache
+
+general_settings: 
+  master_key: os.environ/LLLM_SK
+  store_model_in_db: true
+  store_prompts_in_spend_logs: true

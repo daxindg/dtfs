@@ -6,24 +6,27 @@ return {
   'tpope/vim-repeat',
   'tpope/vim-sleuth',
   'tpope/vim-commentary',
-
   {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.4',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-media-files.nvim',
-    },
-    config = function ()
-      require('config.telescope')
-    end
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- or if using mini.icons/mini.nvim
+    -- dependencies = { "nvim-mini/mini.icons" },
+    ---@module "fzf-lua"
+    ---@type fzf-lua.Config|{}
+    ---@diagnostic disable: missing-fields
+    opts = {},
+	config = function()
+      require("fzf-lua").setup {}
+	  vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua FzfLua.global()<cr>]], { noremap = true, silent = true})
+	end
+    ---@diagnostic enable: missing-fields
   },
-
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      local ts = require("nvim-treesitter.configs");
+      local ts = require("nvim-treesitter.config");
       ts.setup({
         highlight = { enable = true },
         indent = { enable = false }
@@ -37,13 +40,19 @@ return {
       require('config.gitsigns');
     end
   },
-
-  -- TODO: switch to nvim-tree
   {
-    'preservim/nerdtree',
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     config = function()
-      require('config.nerdtree');
-    end
+      require("nvim-tree").setup {}
+
+      vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', {noremap= true, silent = true})
+      vim.api.nvim_set_keymap('n', '<C-f>', ':NvimTreeFindFile<CR>', {noremap= true, silent = true})
+    end,
   },
   {
     'navarasu/onedark.nvim',
