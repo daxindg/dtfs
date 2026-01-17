@@ -19,6 +19,7 @@ return {
 	config = function()
       require("fzf-lua").setup {}
 	  vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua FzfLua.global()<cr>]], { noremap = true, silent = true})
+	  vim.api.nvim_set_keymap('n', '<leader>rg', [[<cmd>lua FzfLua.live_grep()<cr>]], { noremap = true, silent = true})
 	end
     ---@diagnostic enable: missing-fields
   },
@@ -93,7 +94,7 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-      'hrsh8th/cmp-nvim-lua',
+      --'hrsh8th/cmp-nvim-lua',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp-signature-help',
 

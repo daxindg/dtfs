@@ -1,0 +1,33 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode",
+  "autoupdate": true,
+  "model": "litellm/openai/Ark-deepseek-v3.2",
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "chrome-devtools-mcp@latest",
+        "--autoConnect",
+      ]
+    }
+  },
+  "provider": {
+    "litellm": {
+      "name": "Local",
+      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "kimi-k2": {},
+        "deepseek-reasoner": {},
+        "deepseek-chat": {},
+        "volc_ds_v3_1_t": {},
+        "openai/Ark-deepseek-v3.2": {}
+      },
+      "options": {
+        "apiKey": "{file:~/.lllmsk}",
+        "baseURL": "http://localhost:4000"
+      }
+    }
+  }
+}

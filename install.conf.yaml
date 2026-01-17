@@ -9,6 +9,7 @@
 
 - link:
     ~/.config/nvim/: nvim/*
+    ~/.config/opencode/opencode.jsonc: opencode.jsonc
     ~/.tmux.conf: .tmux.conf
     ~/.vimrc: .vimrc
     ~/.zshrc: .zshrc

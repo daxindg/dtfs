@@ -1,5 +1,20 @@
 model_list:
+  - model_name: volc_ds_v3_1_t
+    litellm_params:
+      model: os.environ/VOLC_DS_V3_1_T_MODEL
+      api_base: os.environ/KIMI_BASE_URL
+      api_key: "os.environ/KIMI_API_KEY"
   - model_name: kimi-k2
+    litellm_params:
+      model: os.environ/KIMI_MODEL
+      api_base: os.environ/KIMI_BASE_URL
+      api_key: "os.environ/KIMI_API_KEY"
+  - model_name: claude-sonnet-4-5-20250929
+    litellm_params:
+      model: os.environ/KIMI_MODEL
+      api_base: os.environ/KIMI_BASE_URL
+      api_key: "os.environ/KIMI_API_KEY"
+  - model_name: claude-haiku-4-5-20251001
     litellm_params:
       model: os.environ/KIMI_MODEL
       api_base: os.environ/KIMI_BASE_URL
@@ -8,6 +23,15 @@ model_list:
     litellm_params:
       model: deepseek/deepseek-reasoner
       api_key: os.environ/DS_API_KEY
+  - model_name: deepseek-chat
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: os.environ/DS_API_KEY
+  - model_name: doubao-seed-embedding
+    litellm_params:
+      model: os.environ/VOLC_EMBEDING_MODEL
+      api_base: os.environ/KIMI_BASE_URL
+      api_key: os.environ/VOLC_API_KEY
 
 litellm_settings:
   cache: True
@@ -15,7 +39,7 @@ litellm_settings:
     type: disk
     disk_cache_dir: /app/.litellm-cache
 
-general_settings: 
+general_settings:
   master_key: os.environ/LLLM_SK
   store_model_in_db: true
   store_prompts_in_spend_logs: true
