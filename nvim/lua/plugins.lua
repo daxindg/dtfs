@@ -25,7 +25,15 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate'
+    build = ':TSUpdate',
+    config = function()
+      local ts = require("nvim-treesitter.config");
+      ts.setup({
+        ensure_installed = { "markdown", "lua", "vim" },
+        highlight = { enable = true },
+        indent = { enable = false }
+      });
+    end
   },
 
   {

@@ -92,11 +92,9 @@ export NVM_DIR="$HOME/.nvm"
 
 #. "$HOME/.local/bin/env"
 export PATH="$HOME/.fzf/bin:$PATH"
-export PATH="$HOME/.fzf/bin:$PATH"
 
 # bun completions
-[ -s "/Users/bytedance/.bun/_bun" ] && source "/Users/bytedance/.bun/_bun"
-
+[ -s "/home/daxindg/.bun/_bun" ] && source "/home/daxindg/.bun/_bun"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

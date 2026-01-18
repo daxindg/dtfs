@@ -32,6 +32,11 @@ model_list:
       model: os.environ/VOLC_EMBEDING_MODEL
       api_base: os.environ/KIMI_BASE_URL
       api_key: os.environ/VOLC_API_KEY
+  - model_name: glm-4.7
+    litellm_params:
+      model: zai/glm-4.7
+      api_key: "os.environ/ZAI_API_KEY"
+      api_base: "https://open.bigmodel.cn/api/coding/paas/v4"
 
 litellm_settings:
   cache: True
