@@ -127,12 +127,12 @@ return {
   -- },
 
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-  },
+    "OXY2DEV/markview.nvim",
+    lazy = false,
 
+    -- Completion for `blink.cmp`
+    -- dependencies = { "saghen/blink.cmp" },
+  },
   {
     'martineausimon/nvim-lilypond-suite',
     config = function()

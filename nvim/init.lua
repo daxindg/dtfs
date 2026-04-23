@@ -78,7 +78,7 @@ vim.api.nvim_set_keymap('i', '<C-j>', '<Esc>', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-j>', '<Esc>', { noremap = true })
 
 --Remap escape to leave terminal mode
-vim.api.nvim_exec2([[
+vim.api.nvim_exec([[
   augroup Terminal
     autocmd!
     au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
@@ -106,7 +106,7 @@ end
 vim.api.nvim_set_keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', { noremap = true })
 
 -- Highlight on yank
-vim.api.nvim_exec2([[
+vim.api.nvim_exec([[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()

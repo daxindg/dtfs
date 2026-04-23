@@ -35,7 +35,7 @@ detect_os() {
 
 get_install_cmd() {
     case "$1" in
-        ubuntu|debian) echo "sudo apt" ;;
+        ubuntu|debian|velinux) echo "sudo apt" ;;
         fedora) echo "sudo dnf" ;;
         arch|manjaro) echo "sudo pacman" ;;
         opensuse*) echo "sudo zypper" ;;
@@ -97,7 +97,7 @@ set_default_shell() {
         grep -qx "$zsh_path" /etc/shells 2>/dev/null || echo "$zsh_path" | sudo tee -a /etc/shells >/dev/null
     fi
 
-    chsh -s "$zsh_path"
+    sudo chsh -s "$zsh_path" $USER
     success "Default shell changed. Please log out/in to apply."
 }
 
@@ -224,7 +224,7 @@ install_neovim() {
     log "Installing Neovim..."
 
     case "$os" in
-        ubuntu|debian)
+        ubuntu|debian|velinux)
             sudo add-apt-repository -y ppa:neovim-ppa/unstable 2>/dev/null || true
             ;;
     esac
